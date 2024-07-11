@@ -8,8 +8,12 @@ import 'package:weniatest/features/crypto/presentation/search/search_screen.dart
 import 'package:weniatest/features/crypto/presentation/search/search_viewmodel.dart';
 import 'package:weniatest/features/home/home_screen.dart';
 import 'package:weniatest/features/home/home_viewmodel.dart';
+import 'package:weniatest/features/login/presentation/login_screen.dart';
+import 'package:weniatest/features/login/presentation/login_viewmodel.dart';
 import 'package:weniatest/features/profile/presentation/profile_screen.dart';
 import 'package:weniatest/features/profile/presentation/profile_viewmodel.dart';
+import 'package:weniatest/features/registration/presentation/registration_screen.dart';
+import 'package:weniatest/features/registration/presentation/registration_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (_) => service_locator.getIt<LoginViewModel>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => service_locator.getIt<RegistrationViewModel>(),
+        ),
         ChangeNotifierProvider(
           create: (_) => service_locator.getIt<HomeViewModel>(),
         ),
@@ -44,8 +54,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomeScreen(),
+        home: LoginScreen(),
         routes: {
+          '/login': (context) => LoginScreen(),
+          '/register': (context) => RegistrationScreen(),
+          '/home': (context) => HomeScreen(),
           '/search': (context) => SearchScreen(),
           '/favorites': (context) => FavoritesScreen(),
           '/profile': (context) => ProfileScreen(),

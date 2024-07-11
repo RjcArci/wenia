@@ -13,7 +13,14 @@ import 'package:weniatest/features/crypto/presentation/comparator/comparator_vie
 import 'package:weniatest/features/crypto/presentation/favorites/favorities_viewmodel.dart';
 import 'package:weniatest/features/crypto/presentation/search/search_viewmodel.dart';
 import 'package:weniatest/features/home/home_viewmodel.dart';
+import 'package:weniatest/features/login/data/repositories/AuthRepositoryImpl.dart';
+import 'package:weniatest/features/login/domain/repositories/AuthRepository.dart';
+import 'package:weniatest/features/login/domain/usecase/LoginUseCase.dart';
+import 'package:weniatest/features/login/presentation/login_viewmodel.dart';
 import 'package:weniatest/features/profile/presentation/profile_viewmodel.dart';
+import 'package:weniatest/features/registration/data/repositories/RegistrationRepositoryImpl.dart';
+import 'package:weniatest/features/registration/domain/repository/RegistrationRepository.dart';
+import 'package:weniatest/features/registration/domain/usecases/RegistrationUseCase.dart';
 
 final getIt = GetIt.instance;
 
@@ -31,14 +38,28 @@ Future<void> setup() async {
     ),
   );
 
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(),
+  );
+
+  getIt.registerLazySingleton<RegistrationRepository>(
+    () => RegistrationRepositoryImpl(),
+  );
+
+  getIt.registerLazySingleton(() => LoginUseCase(getIt()));
+  getIt.registerLazySingleton(() => RegistrationUseCase(getIt()));
   getIt.registerLazySingleton(() => SearchCryptoUseCase(getIt()));
   getIt.registerLazySingleton(() => GetSavedCryptosUseCase(getIt()));
   getIt.registerLazySingleton(() => SaveCryptoUseCase(getIt()));
   getIt.registerLazySingleton(() => RemoveCryptoUseCase(getIt()));
 
+  getIt.registerFactory(() => LoginViewModel(
+        loginUseCase: getIt(),
+      ));
+
   getIt.registerFactory(() => HomeViewModel(
-    getSavedCryptos: getIt(),
-  ));
+        getSavedCryptos: getIt(),
+      ));
 
   getIt.registerFactory(() => CryptoFavoritesViewModel(
         getSavedCryptos: getIt(),
