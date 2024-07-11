@@ -44,5 +44,9 @@ Follow these steps to set up and run the project on your local machine:
 
 ### Step 2: Get dependencies
 
-`fluuter pub get`
+`flutter pub get`
+
+### Step 3: Build and run
+
+
 
