@@ -9,9 +9,11 @@ class LoginViewModel extends ChangeNotifier {
   });
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
   void login(BuildContext context, String username, String password) async {
@@ -34,6 +36,6 @@ class LoginViewModel extends ChangeNotifier {
   }
 
   void register(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/profile');
+    Navigator.pushNamed(context, '/register');
   }
 }

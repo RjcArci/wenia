@@ -33,6 +33,12 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text('Search Cryptos'),
         actions: [
           IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+          ),
+          IconButton(
             icon: Icon(viewModel.isDescending
                 ? Icons.arrow_downward
                 : Icons.arrow_upward),

@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo.png', height: 100),
+                Text("Wenia Test", style: TextStyle(fontSize: 24)),
                 // Add your logo asset here
                 SizedBox(height: 32),
                 TextField(
